@@ -1,0 +1,17 @@
+- retrieve matrix from input
+- retrieve b values
+- output matrix
+- go through each row up to [i][j-1]
+- choose max element, add to scale factor array
+- compute scale rations and add to scale ratio array
+- choose max scale ratio, then choose pivot row based on index
+- compute multipliers, add to multipliers array
+- multiply pivot coeffs and store
+- subtract new pivot coeffs from each row coeffs in matrix
+- output new matrix
+- keep track of 'l' array
+- repeat until done
+
+
+- compute solution using values in final matrix and l array
+- output solution
