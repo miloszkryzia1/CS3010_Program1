@@ -28,6 +28,7 @@ public class Main{
         }
         System.out.println("Choose input method:\n1) From console\n2) From file");
         int option = scanner.nextInt();
+        scanner.nextLine();
         switch (option){
             case 1:
                 System.out.println("Enter the coefficients and b value for each row: ");
@@ -39,6 +40,7 @@ public class Main{
                     }
                     bValues[i] = rowScanner.nextDouble();
                 }
+                System.out.println();
                 break;
             case 2:
                 System.out.println("Enter file name: ");
@@ -62,7 +64,7 @@ public class Main{
         //get scale factor
         for (int i = 0; i < coeffMatrix.length; i++){
             double max = Math.abs(coeffMatrix[i][0]);
-            for (int j = 0; j < coeffMatrix[i].length - 1; j++){
+            for (int j = 0; j < coeffMatrix[i].length; j++){
                 if (Math.abs(coeffMatrix[i][j]) > max){
                     max = Math.abs(coeffMatrix[i][j]);
                 }
@@ -97,6 +99,7 @@ public class Main{
             System.out.println();
 
             //Choose pivot row
+            //FIX - REPEATED PIVOT POSSIBLE
             int pivot = 0;
             for (int i = 0; i < sRatios.length; i++){
                 if (sRatios[i] > sRatios[pivot]){
