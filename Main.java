@@ -188,7 +188,7 @@ public class Main{
         //Output solution
         System.out.println("Solution: ");
         for (int j = 0; j < solutions.length; j++){
-            System.out.println("x(" + (j+1) + ")" + " = " + solutions[j]);
+            System.out.println("x(" + (j+1) + ")" + String.format(" = %.2f", solutions[j]));
         }
     }
 
