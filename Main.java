@@ -176,7 +176,6 @@ public class Main{
             b /= currentRow[i];
             solutions[i] = b;
             if (i > 0){
-                //coeffMatrix[l[i-1]][i] *= b;
                 for (int k = 0; k < coeffMatrix.length; k++){
                     if (k != rowIndex){
                         coeffMatrix[k][i] *= b;
