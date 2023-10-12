@@ -42,7 +42,7 @@ public class Main{
                 System.out.println();
                 break;
             case 2:
-                System.out.println("Enter file name: ");
+                System.out.println("Enter file name or path: ");
                 File inputFile = new File(scanner.next());
                 Scanner fileScanner = new Scanner(inputFile);
                 for (int i = 0; i < numEqns; i++){
