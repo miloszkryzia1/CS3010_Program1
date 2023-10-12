@@ -10,10 +10,11 @@ public class Main{
         double[] s;
         double[] sRatios;
         int[] l;
+        ArrayList<Integer> lList = new ArrayList<>();
         double[] multipliers;
         int numEqns;
         ArrayList<Integer> usedPivots = new ArrayList<>();
-        double[] solutions = {0,0,0};
+        double[] solutions;
 
         //get input
         Scanner scanner = new Scanner(System.in);
@@ -22,10 +23,8 @@ public class Main{
         coeffMatrix = new double[numEqns][numEqns];
         bValues = new double[numEqns];
         s = new double[numEqns];
+        solutions = new double[numEqns];
         l = new int[numEqns];
-        for (int i = 0; i < numEqns; i++){
-            l[i] = i;
-        }
         System.out.println("Choose input method:\n1) From console\n2) From file");
         int option = scanner.nextInt();
         scanner.nextLine();
@@ -71,7 +70,7 @@ public class Main{
             }
             s[i] = max;
         }
-        //for tests - output scale factor
+        //output scale factor
             System.out.println("Scale factor: ");
             for (double fact : s){
                 System.out.print(fact + " ");   
@@ -81,6 +80,9 @@ public class Main{
 
         //perform Gaussian Elimination with Scaled partial pivoting
         for (int k = 0; k < numEqns-1; k++){
+            System.out.println("=========================");
+            //output step number
+            System.out.println("Step " + (k+1) + "\n");
 
             //get scale ratios
             sRatios = new double[numEqns - k];
@@ -92,17 +94,14 @@ public class Main{
                 }
             }
             //for tests - output scale ratios
-            System.out.println("Scale ratios: ");
+            System.out.print("Scale ratios: ");
             for (double r : sRatios){
              System.out.print(r + " ");   
             }
             System.out.println();
 
             //Choose pivot row
-            //FIX - REPEATED PIVOT POSSIBLE
-            //NEED TO ADD TEMP INDEX ARRAY TO CHOOSE PIVOT FROM
             int[] tempIndexes = new int[numEqns - k];
-            //fix temp indexes assignment
             int n = 0;
             for (int i = 0; i < numEqns; i++){
                 if (!usedPivots.contains(i)){
@@ -119,41 +118,28 @@ public class Main{
             }
             int pivot = tempIndexes[pivotIndex];
             usedPivots.add(pivot);
-            //for test - output pivot row
+
+            //output pivot row
             System.out.println("Pivot row: " + (pivot + 1));
 
             //Compute multipliers
             multipliers = new double[numEqns - usedPivots.size()];
-            for (int i = 0, j = 0; i < numEqns-k; i++){
-                if (i != pivot){
+            for (int i = 0, j = 0; i < numEqns; i++){
+                if ((i != pivot) && (!usedPivots.contains(i))){
                     multipliers[j] = coeffMatrix[i][k] / coeffMatrix[pivot][k];
                     j++;
                 }
             }
-            //for tests - output multipliers
-            System.out.println("Multipliers: ");
+            //output multipliers
+            System.out.print("Multipliers: ");
             for (double m : multipliers){
                 System.out.print(m + " ");   
             }
             System.out.println();
             System.out.println();
 
-            //change and output l vector
-            ArrayList<Integer> lList = new ArrayList<>();
-            for (int num : l){
-                lList.add(num);
-            }
-            int stepNumIndex = lList.indexOf(k);
-            int pivotRowNumIndex = lList.indexOf(pivot);
-            int temp = l[stepNumIndex];
-            l[stepNumIndex] = l[pivotRowNumIndex];
-            l[pivotRowNumIndex] = temp;
-            System.out.println("L Vector :");
-            for (int num : l){
-                System.out.print((num+1) + " ");
-            }
-            System.out.println();
-            System.out.println();
+            //add to l vector
+            lList.add(pivot);
 
             //compute new matrix
             for (int i = 0, m = 0; i < coeffMatrix.length; i++){
@@ -173,7 +159,24 @@ public class Main{
             System.out.println();
             System.out.println();
             outputMatrix(coeffMatrix);
+            System.out.println("=========================");
         }
+
+        //Fill L array
+        for (int i = 0; i < numEqns; i++){
+            if (!lList.contains(i)){
+                lList.add(i);
+            }
+        }
+        for (int i = 0; i < lList.size(); i++){
+            l[i] = lList.get(i);
+        }
+        System.out.print("Final L vector: ");
+        for (int index : l){
+            System.out.print(index + 1 + " ");
+        }
+        System.out.println();
+        System.out.println();
 
         //Solve - back substitution
         int i = numEqns - 1;
