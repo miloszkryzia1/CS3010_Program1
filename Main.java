@@ -100,12 +100,24 @@ public class Main{
 
             //Choose pivot row
             //FIX - REPEATED PIVOT POSSIBLE
-            int pivot = 0;
-            for (int i = 0; i < sRatios.length; i++){
-                if (sRatios[i] > sRatios[pivot]){
-                    pivot = i;
+            //NEED TO ADD TEMP INDEX ARRAY TO CHOOSE PIVOT FROM
+            int[] tempIndexes = new int[numEqns - k];
+            //fix temp indexes assignment
+            int n = 0;
+            for (int i = 0; i < numEqns; i++){
+                if (!usedPivots.contains(i)){
+                    tempIndexes[n] = i;
+                    n++;
                 }
             }
+            int pivotIndex = 0;
+            for (int i = 0; i < sRatios.length; i++){
+                if (sRatios[i] > sRatios[pivotIndex])
+                {
+                    pivotIndex = i;
+                }
+            }
+            int pivot = tempIndexes[pivotIndex];
             usedPivots.add(pivot);
             //for test - output pivot row
             System.out.println("Pivot row: " + (pivot + 1));
