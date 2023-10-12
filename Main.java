@@ -58,7 +58,8 @@ public class Main{
                 System.out.println("Invalid option!");
                 break;
         }
-        outputMatrix(coeffMatrix);
+        System.out.println("Initial coefficient matrix and b values:");
+        outputMatrix(coeffMatrix, bValues);
 
         //get scale factor
         for (int i = 0; i < coeffMatrix.length; i++){
@@ -151,15 +152,11 @@ public class Main{
                     m++;
                 }
             }
-            //for tests - output b values
-            System.out.println("B vector: ");
-            for (double b : bValues){
-                System.out.print(b + " ");   
-            }
-            System.out.println();
-            System.out.println();
-            outputMatrix(coeffMatrix);
-            System.out.println("=========================");
+
+            //output matrix
+            System.out.println("Resulting coefficient matrix and b values:");
+            outputMatrix(coeffMatrix, bValues);
+            System.out.println("=========================\n");
         }
 
         //Fill L array
@@ -211,13 +208,19 @@ public class Main{
     }
 
     //Ouput current coefficient matrix
-    private static void outputMatrix(double[][] matrix){
+    private static void outputMatrix(double[][] matrix, double[] b){
         for (int i = 0; i < matrix.length; i++){
             for (int j = 0; j < matrix[i].length; j++){
                 System.out.print(matrix[i][j] + " ");
             }
             System.out.println();
         }
+        System.out.println();
+        System.out.print("B = [ ");
+        for (int i = 0; i < b.length; i++){
+            System.out.print(b[i] + " ");
+        }
+        System.out.println("]");
         System.out.println();
     }
 }
