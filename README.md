@@ -20,6 +20,12 @@ Represents the linear system: <br>
 2x<sub>1</sub> – x<sub>2</sub> = 1 <br>
 -x<sub>1</sub> + 3x<sub>2</sub> – x<sub>3</sub> = 8 <br>
 -x<sub>2</sub> + 2x<sub>3</sub> = -5 <be>
+Also represented in matrix form as:
+```
+| 2  | -1| 3  |         | 1  |
+| -1 | 3 | -1 | = | x | | 8  |
+| 0  | -1| 2  |         | -5 |
+```
 
 II) **Output initial coefficient matrix, B vector, and calculated scale factor.** This is done right
 after processing the user’s input.
