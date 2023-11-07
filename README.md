@@ -34,3 +34,14 @@ after processing the user’s input.
 III) **Perform Gaussian Elimination with partial pivoting.** At each step, the program computes
 the scale ratios, selects the pivot row, computes multipliers, and finally computes the
 resulting coefficient matrix and B vector. At each step, these values are output for the user.
+
+IV) **Output the final index vector and solution.** The user is given the solution to their linear
+system in the following format:
+```
+Final L vector: 1 2 3
+
+Solution
+x(1) = 2.00
+x(2) = 3.00
+x(3) = -1.00
+```
