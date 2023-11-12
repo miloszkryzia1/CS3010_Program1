@@ -1,4 +1,4 @@
-# Overview
+# Gaussian Elimination Program
 This project is a Java console program that solves a linear system with any number of equations using the
 Gaussian Elimination method with partial pivoting.
 ---
